@@ -1,21 +1,22 @@
 import React, { Component } from "react"
 
 class App extends Component {
-    constructor() {
-        super()
-        
+    state = {
+        people: []
     }
 
     componentDidMount() {
         console.log("CDM")
         fetch('http://api.open-notify.org/astros.json') 
             .then(json => json.json())
-            .then(data => console.log(data))
+            .then(data => this.setState({people: data.people}))
     }
 
     render() {
         return (
-        <h1>Hello!</h1>
+            <div> 
+                {this.state.people.map(person => <h1>{person.name}</h1>)}
+            </div>
     )}
 }
 
